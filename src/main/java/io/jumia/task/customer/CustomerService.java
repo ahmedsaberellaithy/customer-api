@@ -132,6 +132,30 @@ public class CustomerService {
 		}
 	}
 	
+	private static boolean shouldReturnThisCustomer(Customer customer,int valid) {
+		if(valid != 2) {
+			boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer);
+			if((valid == 1 && isValidPhoneNumber) || (valid == 0 && !isValidPhoneNumber)){
+				return true;
+			}
+		}else { //get all
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean shouldReturnThisCustomer(Customer customer,int country,int valid) {
+		if(valid != 2) {
+			boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
+			if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
+				return true;
+			}
+		}else {
+			return true;
+		}
+		return false;
+	}
+	
 	/**
 	 * 
 	 * @param customers list of raw customers retrieved from the database
@@ -157,71 +181,41 @@ public class CustomerService {
 		for(Customer customer : customers) {
 			switch(country) {
 				case 0: //get all countries
-					if(valid != 2) {
-						boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer);
-						if((valid == 1 && isValidPhoneNumber) || (valid == 0 && !isValidPhoneNumber)){
-							filteredCustomers.add(customer);
-						}
-					}else { //get all
+					if(shouldReturnThisCustomer(customer,valid)) {
 						filteredCustomers.add(customer);
 					}
 					break;
 				case 1:
 					if(customer.getPhone().matches(cameroonRegex)) {
-						if(valid != 2) {
-							boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
-							if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
-								filteredCustomers.add(customer);
-							}
-						}else {
+						if(shouldReturnThisCustomer(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 2:
 					if(customer.getPhone().matches(ethiopiaRegex)) {
-						if(valid != 2) {
-							boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
-							if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
-								filteredCustomers.add(customer);
-							}
-						}else {
+						if(shouldReturnThisCustomer(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 3:
 					if(customer.getPhone().matches(moroccoRegex)) {
-						if(valid != 2) {
-							boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
-							if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
-								filteredCustomers.add(customer);
-							}
-						}else {
+						if(shouldReturnThisCustomer(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 4:
 					if(customer.getPhone().matches(mozambiqueRegex)) {
-						if(valid != 2) {
-							boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
-							if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
-								filteredCustomers.add(customer);
-							}
-						}else {
+						if(shouldReturnThisCustomer(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 5:
 					if(customer.getPhone().matches(ugandaRegex)) {
-						if(valid != 2) {
-							boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
-							if((valid == 1 && isValidPhoneNumber) || (valid == 0 && !isValidPhoneNumber)){
-								filteredCustomers.add(customer);
-							}
-						}else {
+						if(shouldReturnThisCustomer(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}

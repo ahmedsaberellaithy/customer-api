@@ -12,8 +12,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-
+@SpringBootTest
 class CustomerServiceTest {
 	
 	@Autowired
@@ -67,7 +68,7 @@ class CustomerServiceTest {
 		assertThat(allCustomers.size(), is(20));
 		List<Customer> emptyListCustomers = customerService.filterCustomers(customers,"morocca","valid");
 		assertThat(emptyListCustomers.size(), is(0));
-//		fail("Not yet implemented");
+		//fail("Not yet implemented");
 	}
 
 }
