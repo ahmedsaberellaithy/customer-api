@@ -8,12 +8,11 @@ COPY .mvn .mvn
 # Copy the pom.xml file
 COPY pom.xml .
 # Build all the dependencies in preparation to go offline.
-# dependency:go-offline can be used to ensure you have all of your dependencies installed locally before you begin to work offline
-# This is a separate step so the dependencies will be cached unless
-# the pom.xml file has changed.
 RUN ./mvnw dependency:go-offline
 # Copy the project source
 COPY src src
+# Copy the db sample
+COPY jumia.db jumia.db
 # Package the application
 RUN ./mvnw clean
 RUN ./mvnw package -DskipTests -Pprod,no-liquibase
@@ -26,5 +25,4 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 # MainApp is the main class of your java app
-ENTRYPOINT ["java","-cp","app:app/lib/*","io.jumia.task.CustomerApiApplication.Main"]
-EXPOSE 8082
+ENTRYPOINT ["java","-cp","app:app/lib/*","io.jumia.task.CustomerApiApplication"]
