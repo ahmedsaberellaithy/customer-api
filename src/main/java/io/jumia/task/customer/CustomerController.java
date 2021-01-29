@@ -26,8 +26,6 @@ public class CustomerController {
 		
 		List<Customer> customers = customerService.getAllCustomers();
 		if(country != null || valid != null) {
-			System.out.println(country);
-			System.out.println(valid);
 			return customerService.filterCustomers(customers,country,valid);
 		}else {
 			return customers;

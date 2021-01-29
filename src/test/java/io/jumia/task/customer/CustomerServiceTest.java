@@ -1,7 +1,6 @@
 package io.jumia.task.customer;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.hamcrest.collection.IsIterableContainingInAnyOrder.containsInAnyOrder;
 import static org.hamcrest.collection.IsIterableContainingInOrder.contains;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -64,10 +63,21 @@ class CustomerServiceTest {
 
 	@Test
 	void testFilterCustomers() {
+		//get all customers, no filters
 		List<Customer> allCustomers = customerService.filterCustomers(customers,null,null);
 		assertThat(allCustomers.size(), is(20));
-		List<Customer> emptyListCustomers = customerService.filterCustomers(customers,"morocca","valid");
-		assertThat(emptyListCustomers.size(), is(0));
+		
+		//get an empty list, invalid input
+		List<Customer> emptyListCustomersWrongCountry = customerService.filterCustomers(customers,"morocca","valid");
+		assertThat(emptyListCustomersWrongCountry.size(), is(0));
+		List<Customer> emptyListCustomersWrongValidityStatus = customerService.filterCustomers(customers,"morocco","rvalid");
+		assertThat(emptyListCustomersWrongValidityStatus.size(), is(0));
+		
+		//valid filters
+		List<Customer> moroccoListCustomers = customerService.filterCustomers(customers,"morocco",null);
+		assertThat(moroccoListCustomers.size(), is(7));
+		List<Customer> mozambiqueInValidListCustomers = customerService.filterCustomers(customers,"mozambique","inValid");
+		assertThat(mozambiqueInValidListCustomers.size(), is(2));
 		//fail("Not yet implemented");
 	}
 

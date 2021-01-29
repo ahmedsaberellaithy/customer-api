@@ -132,7 +132,7 @@ public class CustomerService {
 		}
 	}
 	
-	private static boolean shouldReturnThisCustomer(Customer customer,int valid) {
+	private static boolean isThisCustomerEligableForFiltering(Customer customer,int valid) {
 		if(valid != 2) {
 			boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer);
 			if((valid == 1 && isValidPhoneNumber) || (valid == 0 && !isValidPhoneNumber)){
@@ -144,7 +144,7 @@ public class CustomerService {
 		return false;
 	}
 	
-	private static boolean shouldReturnThisCustomer(Customer customer,int country,int valid) {
+	private static boolean isThisCustomerEligableForFiltering(Customer customer,int country,int valid) {
 		if(valid != 2) {
 			boolean isValidPhoneNumber = CustomerService.isValidPhoneNumber(customer,country);
 			if((valid == 1 && isValidPhoneNumber)|| (valid == 0 && !isValidPhoneNumber)){
@@ -181,41 +181,41 @@ public class CustomerService {
 		for(Customer customer : customers) {
 			switch(country) {
 				case 0: //get all countries
-					if(shouldReturnThisCustomer(customer,valid)) {
+					if(isThisCustomerEligableForFiltering(customer,valid)) {
 						filteredCustomers.add(customer);
 					}
 					break;
 				case 1:
 					if(customer.getPhone().matches(cameroonRegex)) {
-						if(shouldReturnThisCustomer(customer,country,valid)) {
+						if(isThisCustomerEligableForFiltering(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 2:
 					if(customer.getPhone().matches(ethiopiaRegex)) {
-						if(shouldReturnThisCustomer(customer,country,valid)) {
+						if(isThisCustomerEligableForFiltering(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 3:
 					if(customer.getPhone().matches(moroccoRegex)) {
-						if(shouldReturnThisCustomer(customer,country,valid)) {
+						if(isThisCustomerEligableForFiltering(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 4:
 					if(customer.getPhone().matches(mozambiqueRegex)) {
-						if(shouldReturnThisCustomer(customer,country,valid)) {
+						if(isThisCustomerEligableForFiltering(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
 					break;
 				case 5:
 					if(customer.getPhone().matches(ugandaRegex)) {
-						if(shouldReturnThisCustomer(customer,country,valid)) {
+						if(isThisCustomerEligableForFiltering(customer,country,valid)) {
 							filteredCustomers.add(customer);
 						}
 					}
