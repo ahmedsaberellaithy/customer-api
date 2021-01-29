@@ -6,6 +6,11 @@ email: ahmedsaber.1992@gmail.com
 This is a basic project that lists and filters contacts based on country and validity of the phone number
 Build by springboot 2.4.2
 
+### API Documentation
+	- http://localhost:8082 #health check, to make sure project started
+	- http://localhost:8082/customers #return all customers in the database
+	- http://localhost:8082/customers?country=morocco&valid=valid #return all customers in the database
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
