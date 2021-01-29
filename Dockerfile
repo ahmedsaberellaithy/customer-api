@@ -11,8 +11,6 @@ COPY pom.xml .
 RUN ./mvnw dependency:go-offline
 # Copy the project source
 COPY src src
-# Copy the db sample
-COPY jumia.db jumia.db
 # Package the application
 RUN ./mvnw clean
 RUN ./mvnw package -DskipTests -Pprod,no-liquibase
