@@ -1,4 +1,4 @@
-# Customers API backend for Jumia task
+# Customers API backend
 Author: Ahmed Saber Ahmed
 email: ahmedsaber.1992@gmail.com
 
